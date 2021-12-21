@@ -45,6 +45,7 @@ const List = () => {
 			// Eliminamos la camara seleccionada si este rover no la tiene
 			let equippedCamera = (getCameras({rover: value}).indexOf(params.get('camera')) > -1);
 			if(!equippedCamera) params.delete('camera');
+			params.set('page', 1);
 			history.push(`/list/${value}?${params.toString()}`);
 
 		} else if(name === 'page') {
@@ -91,7 +92,7 @@ const List = () => {
 					/>
 				</Header>
 			</LayoutContainer>
-			<Main>
+			<Main sending={ sending }>
 				{ photos.length > 0 ?
 					<>
 						<Gallery>
@@ -102,16 +103,22 @@ const List = () => {
 								{ 'More images' }
 							</More>
 							:
-							<Text>
-								{'There no more pictures'}
-							</Text>
+							<>
+								{ !sending && 
+									<Text>
+										{'There no more pictures'}
+									</Text>
+								}
+							</>
 						}
 					</>
 					:
 					<>
-						<Text>
-							{'No results found. try changing some filters'}
-						</Text>
+						{ !sending && 
+							<Text>
+								{'No results found. try changing some filters'}
+							</Text>
+						}
 					</>
 				}
 			</Main>

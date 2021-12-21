@@ -91,6 +91,8 @@ export const Text = styled.span`
 `;
 
 export const More = styled.div`
+	position: absolute;
+	bottom: 0px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
